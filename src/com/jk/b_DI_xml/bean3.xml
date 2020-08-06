@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--
+        级联注入：第一种方式
+       -->
+    <!--<bean id="emp" class="com.jk.bean.Emp">-->
+    <!--    <property name="name" value="Jacks"/>-->
+    <!--    <property name="gender" value="男"/>-->
+    <!--    <property name="dept" ref="dept"/>-->
+    <!--</bean>-->
+    <!--<bean id="dept" class="com.jk.bean.Dept">-->
+    <!--    <property name="name" value="财务部"/>-->
+    <!--</bean>-->
+    <!--级联注入：第二种方式-->
+    <bean id="emp" class="com.jk.b_DI_xml.bean.Emp">
+        <property name="name" value="Jacks"/>
+        <property name="gender" value="男"/>
+        <property name="dept" ref="dept"/>
+        <property name="dept.name" value="财务部"/>
+    </bean>
+    <bean id="dept" class="com.jk.b_DI_xml.bean.Dept"/>
+</beans>
