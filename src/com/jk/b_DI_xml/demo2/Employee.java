@@ -1,35 +1,29 @@
-package com.jk.b_DI_xml.bean;
+package com.jk.b_DI_xml.demo2;
 
-/*
-员工类
+/**
+ * 演示注入 bean 类型
  */
-public class Emp {
+public class Employee {
     private String name;
-    private String gender;
     //员工属于某一个部门,使用对象形式表示
-    private Dept dept;
+    private Department dept;
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public void setDept(Dept dept) {
+    public void setDept(Department dept) {
         this.dept = dept;
     }
 
-    public Dept getDept() {
+    public Department getDept() {
         return dept;
     }
 
     @Override
     public String toString() {
-        return "Emp{" +
+        return "Employee{" +
                 "name='" + name + '\'' +
-                ", gender='" + gender + '\'' +
                 ", dept=" + dept +
                 '}';
     }

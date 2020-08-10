@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- 注入外部 bean -->
-    <!--
-        创建 userService 对象
-        注入属性：
-                name：类对象的属性名
-                ref：创建 UserDao 对象的 bean 标签的 id 值
-    -->
-    <bean id="userService" class="com.jk.b_DI_xml.service.UserService">
-        <property name="ud" ref="userDao"/>
+    <!--构造注入-->
+    <bean name="stu,student" class="com.jk.b_DI_xml.demo1.Student">
+        <constructor-arg name="name" value="小明"/>
+        <constructor-arg name="age" value="13"/>
     </bean>
-    <!--        创建 userDao 对象    -->
-    <bean id="userDao" class="com.jk.b_DI_xml.dao.UserDaoImpl"/>
+    <!--setter注入-->
+    <bean id="person" class="com.jk.b_DI_xml.demo1.Person">
+        <property name="name" value="小刚"/>
+        <property name="gender" value="男"/>
+    </bean>
+    <!--p 名称空间注入-->
+    <bean id="personP" class="com.jk.b_DI_xml.demo1.Person" p:name="阿花" p:gender="女"/>
+
 </beans>

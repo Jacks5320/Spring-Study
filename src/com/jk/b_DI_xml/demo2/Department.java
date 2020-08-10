@@ -1,6 +1,9 @@
-package com.jk.b_DI_xml.bean;
+package com.jk.b_DI_xml.demo2;
 
-public class Dept {
+/**
+ * 演示 注入 Bean 类型
+ */
+public class Department {
     private String name;
 
     public void setName(String name) {
@@ -9,7 +12,7 @@ public class Dept {
 
     @Override
     public String toString() {
-        return "Dept{" +
+        return "Department{" +
                 "name='" + name + '\'' +
                 '}';
     }

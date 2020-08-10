@@ -1,28 +1,20 @@
-package com.jk.b_DI_xml.collection;
+package com.jk.b_DI_xml.demo1;
 
+/**
+ * 演示构造注入
+ */
 public class Student {
     private String name;
     private int age;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public Student(String name, int age) {
         this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
         this.age = age;
     }
 
     @Override
     public String toString() {
-        return "Student{" +
+        return "Student2{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
                 '}';

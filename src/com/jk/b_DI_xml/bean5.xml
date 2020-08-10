@@ -2,36 +2,26 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <!--
-        对象集合类型注入
-    -->
-    <bean id="demo2" class="com.jk.b_DI_xml.collection.Demo2">
-        <property name="students">
-            <list>
-                <ref bean="stu1"/>
-                <ref bean="stu2"/>
-                <ref bean="stu3"/>
-            </list>
-        </property>
-        <property name="maps">
+
+    <!-- 注入对象类型的集合 -->
+    <bean id="c1" class="com.jk.b_DI_xml.demo4.Course">
+        <property name="name" value="Java程序开发"/>
+    </bean>
+    <bean id="c2" class="com.jk.b_DI_xml.demo4.Course">
+        <property name="name" value="数据库设计"/>
+    </bean>
+    <bean id="student" class="com.jk.b_DI_xml.demo4.Student2">
+        <property name="map">
             <map>
-                <entry key="1" value-ref="stu1"/>
+                <entry key="第一门课" value-ref="c1"/>
+                <entry key="第二门课" value-ref="c2"/>
             </map>
         </property>
+        <property name="list">
+            <list>
+                <ref bean="c1"/>
+                <ref bean="c2"/>
+            </list>
+        </property>
     </bean>
-
-    <!--创建多个对象-->
-    <bean id="stu1" class="com.jk.b_DI_xml.collection.Student">
-        <property name="name" value="刘备" />
-        <property name="age" value="20" />
-    </bean>
-    <bean id="stu2" class="com.jk.b_DI_xml.collection.Student">
-        <property name="name" value="关羽" />
-        <property name="age" value="19" />
-    </bean>
-    <bean id="stu3" class="com.jk.b_DI_xml.collection.Student">
-        <property name="name" value="张飞" />
-        <property name="age" value="18" />
-    </bean>
-
 </beans>

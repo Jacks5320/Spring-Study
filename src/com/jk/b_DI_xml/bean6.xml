@@ -5,14 +5,20 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                             http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-    <!--提取出list集合部分-->
-    <util:list id="list">
-        <value>刘备</value>
-        <value>关羽</value>
-        <value>张飞</value>
+    <!--提取公共集合-->
+    <util:list id="courseList">
+        <bean class="com.jk.b_DI_xml.demo4.Course">
+            <property name="name" value="Java程序设计"/>
+        </bean>
+        <bean class="com.jk.b_DI_xml.demo4.Course">
+            <property name="name" value="数据库设计"/>
+        </bean>
     </util:list>
-    <!--引用-->
-    <bean id="persons" class="com.jk.b_DI_xml.collection.Person">
-        <property name="names" ref="list"/>
+    <!--注入公共集合-->
+    <bean id="s1" class="com.jk.b_DI_xml.demo4.Student2">
+        <property name="list" ref="courseList"/>
+    </bean>
+    <bean id="s2" class="com.jk.b_DI_xml.demo4.Student2">
+        <property name="list" ref="courseList"/>
     </bean>
 </beans>
