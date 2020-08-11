@@ -4,6 +4,7 @@ import com.jk.b_DI_xml.demo1.Person;
 import com.jk.b_DI_xml.demo1.Student;
 import com.jk.b_DI_xml.demo2.Employee;
 import com.jk.b_DI_xml.demo3.Collection;
+import com.jk.b_DI_xml.demo4.Course;
 import com.jk.b_DI_xml.demo4.Student2;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -90,4 +91,13 @@ public class TestDemo {
         System.out.println(s2);
     }
 
+    //测试引入外部文件
+    @Test
+    public void testProperties(){
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("com/jk/b_DI_xml/bean7.xml");
+        Course c = context.getBean("course", Course.class);
+        System.out.println(c);
+
+    }
 }

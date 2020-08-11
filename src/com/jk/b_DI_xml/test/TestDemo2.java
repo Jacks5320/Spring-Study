@@ -2,7 +2,6 @@ package com.jk.b_DI_xml.test;
 
 import com.jk.b_DI_xml.demo5.ScopeDemo;
 import com.jk.b_DI_xml.demo6.BeanLife;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -16,7 +15,7 @@ public class TestDemo2 {
     @Test
     public void testSingleton() {
         ApplicationContext context =
-                new ClassPathXmlApplicationContext("com/jk/b_DI_xml/bean7.xml");
+                new ClassPathXmlApplicationContext("com/jk/b_DI_xml/bean8.xml");
         ScopeDemo s1 = context.getBean("s1", ScopeDemo.class);
         ScopeDemo s2 = context.getBean("s1", ScopeDemo.class);
         System.out.println(s1);
@@ -28,7 +27,7 @@ public class TestDemo2 {
     @Test
     public void testPrototype() {
         ApplicationContext context =
-                new ClassPathXmlApplicationContext("com/jk/b_DI_xml/bean7.xml");
+                new ClassPathXmlApplicationContext("com/jk/b_DI_xml/bean8.xml");
         ScopeDemo s1 = context.getBean("s2", ScopeDemo.class);
         ScopeDemo s2 = context.getBean("s2", ScopeDemo.class);
         System.out.println(s1);
@@ -40,7 +39,7 @@ public class TestDemo2 {
     @Test
     public void testLife(){
         ClassPathXmlApplicationContext context =
-                new ClassPathXmlApplicationContext("com/jk/b_DI_xml/bean8.xml");
+                new ClassPathXmlApplicationContext("com/jk/b_DI_xml/bean9.xml");
         // 单例
         BeanLife l1 = context.getBean("l1", BeanLife.class);
         System.out.println(l1);
