@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--注入 bean 类型-->
+    <!--第一种：外部注入-->
+    <bean id="d1" class="com.jk.b_DI_xml.demo2.Department">
+        <property name="name" value="管理部"/>
+    </bean>
+    <bean id="e1" class="com.jk.b_DI_xml.demo2.Employee">
+        <property name="name" value="刘备"/>
+        <property name="dept" ref="d1"/>
+    </bean>
+    <!--第二种：级联注入-->
+    <bean id="d2" class="com.jk.b_DI_xml.demo2.Department"/>
+    <bean id="e2" class="com.jk.b_DI_xml.demo2.Employee">
+        <property name="name" value="关羽"/>
+        <!--级联注入-->
+        <property name="dept" ref="d2"/>
+        <property name="dept.name" value="财务部"/>
+    </bean>
+
+    <!--第三种：内部注入-->
+    <bean id="e3" class="com.jk.b_DI_xml.demo2.Employee">
+        <property name="name" value="张飞"/>
+        <!--内部注入-->
+        <property name="dept">
+            <bean class="com.jk.b_DI_xml.demo2.Department">
+                <property name="name" value="安保部"/>
+            </bean>
+        </property>
+    </bean>
+</beans>
