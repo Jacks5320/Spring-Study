@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <!--基于 xml 配置事务-->
+
+    <!--数据源注入-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/example?serverTimezone=Asia/Shanghai"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
+
+    <!--模板对象-->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--注入 dao 实现类-->
+    <bean id="accountDao" class="com.jk.xml.dao.impl.AccountDaoImpl">
+        <property name="jt" ref="jdbcTemplate"/>
+    </bean>
+
+    <!--注入 service 类-->
+    <bean id="accountService" class="com.jk.xml.service.AccountService">
+        <property name="ad" ref="accountDao"/>
+    </bean>
+
+    <!-- 1 创建事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 2 配置通知-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <!--配置事务参数-->
+        <tx:attributes>
+            <!--
+            指定在哪种规则的方法上面添加事务,
+                属性：
+                    - name属性值为方法名，可以用通配符进行通配
+                    - 其他属性为：传播行为、隔离级别、是否只读、超时、回滚规则
+            -->
+            <!--<tx:method name="transferMoney"/>-->
+            <tx:method name="*Money" propagation="REQUIRED" isolation="DEFAULT" read-only="false" timeout="-1"
+                       rollback-for="java.lang.NullPointerException"/>
+        </tx:attributes>
+    </tx:advice>
+    <!-- 3 配置切入点和切面-->
+    <aop:config>
+        <!--配置切入点-->
+        <aop:pointcut id="pointcut" expression="execution(* com.jk.xml.service.AccountService.*(..))"/>
+        <!--配置切面-->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut"/>
+    </aop:config>
+</beans>
